@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>إلى ياسمين ❤️</title>
+<style>
+body{
+    margin:0;
+    overflow-x:hidden;
+    background:black;
+    color:white;
+    font-family:Arial, sans-serif;
+    text-align:center;
+}
+
+/* شاشة الدخول */
+#loginScreen{
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:black;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+#loginScreen input{
+    width:80px;
+    padding:10px;
+    margin:5px;
+    font-size:18px;
+    text-align:center;
+    border-radius:10px;
+    border:none;
+}
+
+#loginScreen button{
+    padding:10px 20px;
+    font-size:18px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    margin-top:10px;
+    background:#ff4da6;
+    color:white;
+}
+
+/* المحتوى الرئيسي */
+#mainContent{
+    display:none;
+    padding-top:20px;
+}
+
+/* العنوان */
+h1{
+    font-size:70px;
+    text-shadow:0 0 60px #ff66cc;
+}
+
+/* الرسائل */
+.message{
+    font-size:24px;
+    color:#ffb3d9;
+    margin:10px 0 20px 0;
+    opacity:0;
+    transition: opacity 1.5s, transform 1.5s;
+    transform:translateY(20px);
+}
+
+/* صورة */
+#photo{
+    width:260px;
+    border-radius:20px;
+    box-shadow:0 0 25px pink;
+    opacity:0;
+    display:none;
+    margin:20px auto;
+}
+
+.pulse{
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+}
+
+/* أزرار */
+button{
+    padding:10px 20px;
+    font-size:18px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    margin:10px auto;
+    display:block;
+}
+
+#yesSecret{background:#ff4da6;color:white;}
+#noSecret{background:white;color:black;}
+.msgBtn{background:#ff66cc;color:white;}
+
+/* قلوب */
+.heart{
+    position:absolute;
+    animation: floatUp 6s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+    from{transform:translateY(100vh); opacity:1;}
+    to{transform:translateY(-10vh); opacity:0;}
+}
+
+/* عداد */
+#countdown{
+    font-size:22px;
+    margin-bottom:20px;
+}
+</style>
+</head>
+<body>
+
+<!-- شاشة تسجيل الدخول -->
+<div id="loginScreen">
+    <h2>اكتبي تاريخ ميلاد عبدالله يا عمري</h2>
+    <input type="number" id="day" placeholder="اليوم " min="1" max="31">
+    <input type="number" id="month" placeholder="الشهر " min="1" max="12"><br>
+    <button onclick="checkPassword()">تفضلي يعمري 💖</button>
+    <p id="errorMsg" style="color:red; font-size:18px;"></p>
+</div>
+
+<!-- المحتوى الرئيسي -->
+<div id="mainContent">
+
+<h1>يـــــاسمينتي تاج راسي وبعد ياسمين فش حدا ❤️</h1>
+
+<div id="countdown"></div>
+
+<img id="photo" src="https://i.imgur.com/NYwsrVD.jpeg" alt="صورتنا ❤️">
+
+<button onclick="showPhotoBtn()">هاد حلمي الاخير 💖</button>
+
+<div class="message" id="msg1">انت مش طبيعية , غرقان بحبك بشكل مش طبيعي , بوعدك اكون الشخص اللي يعوضك عن كل اشي 💕</div>
+<div class="message" id="msg2">بوعدك اسجل بالجيم وكمان اترك الدخان , وبعدك ادللك زي بنتي الصغيرة واكثر 💖</div>
+<div class="message" id="msg3">رأيتك واقفة في آخر الكون ليس بعدك أحد… فأدركت أن الذي جاءني لم يكن إلا فراغًا، وأنك أنتِ كل شيء بالنسبة لي ❤️</div>
+
+<div>
+    <button class="msgBtn" onclick="showMessageCustom('msg4')"> قـلـبـي ؟ 💌</button>
+    <div id="msg4" class="message"></div>
+
+    <button class="msgBtn" onclick="showMessageCustom('msg5')">اكبسي باصبعك اللطيف هون عشان تعرفي شعوري 💖</button>
+    <div id="msg5" class="message"></div>
+
+    <button class="msgBtn" onclick="showMessageCustom('msg6')">آخر امنياتي 💗</button>
+    <div id="msg6" class="message"></div>
+</div>
+
+<div style="margin-top:40px;">
+    <h2 style="color:#ff66cc;">موافقة تحطي ايدك بايدي ونمضي هالعمر سوا؟ 💖</h2>
+    <button id="yesSecret" onclick="acceptedSecret()">نعم 😍</button>
+    <button id="noSecret" onmouseover="moveButtonSecret()">مممم 🤭</button>
+</div>
+
+<audio id="music" autoplay loop>
+  <source src="https://www.dropbox.com/s/6xfnc9h60c9a52qagvb47/love.mp3?raw=1" type="audio/mp3">
+</audio>
+
+</div>
+
+<script>
+/* تحقق كلمة السر */
+function checkPassword(){
+    const day = document.getElementById("day").value;
+    const month = document.getElementById("month").value;
+    const error = document.getElementById("errorMsg");
+    
+    if(day=="23" && month=="4"){
+        document.getElementById("loginScreen").style.display="none";
+        document.getElementById("mainContent").style.display="block";
+        startContent();
+    } else {
+        error.textContent = "الله يسامحك يسعدية لليوم مش حافظة تاريخ ميلادي";
+    }
+}
+
+/* بدء المحتوى */
+function startContent(){
+    const audio = document.getElementById("music");
+    audio.currentTime = 20;
+    audio.play();
+
+    // العداد الكامل: يوم-ساعة-دقيقة-ثانية
+    const targetDate = new Date("July 10, 2026 00:00:00").getTime();
+    const countdown = document.getElementById("countdown");
+    setInterval(function(){
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        const days = Math.floor(distance / (1000*60*60*24));
+        const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+        const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+        const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+        countdown.innerHTML = "باقي على يومنا المميز: " 
+            + days + " يوم " 
+            + hours + " ساعة " 
+            + minutes + " دقيقة " 
+            + seconds + " ثانية ❤️";
+    },1000);
+
+    function createHeart(){
+        const heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="❤";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=(Math.random()*20+20)+"px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),6000);
+    }
+    setInterval(createHeart,400);
+
+    setTimeout(()=>showMessage('msg1'),4000);
+    setTimeout(()=>showMessage('msg2'),7000);
+    setTimeout(()=>showMessage('msg3'),10000);
+}
+
+function showMessage(id){
+    const msg=document.getElementById(id);
+    msg.style.opacity=1;
+    msg.style.transform="translateY(0)";
+}
+
+function showMessageCustom(type){
+    let text="";
+    if(type==="msg4") text="قلبي كله الك وعلى حسابك يروحي وتصرفي فيه براحتك وديري بالك عليه 💌";
+    else if(type==="msg5") text="شعوري واضح ولامستيه انتِ واكيد حاسة فيه ومقدرتيه 💖";
+    else if(type==="msg6") text="بالنهاية بتمنى من ربنا يتمم كل امورنا على خير لانه انا مش شايف حياتي مع غيرك ❤️";
+
+    const msgContainer=document.getElementById(type);
+    msgContainer.style.opacity=0;
+    msgContainer.style.transform="translateY(20px)";
+    setTimeout(()=>{
+        msgContainer.textContent=text;
+        msgContainer.style.transition="opacity 1.5s, transform 1.5s";
+        msgContainer.style.opacity=1;
+        msgContainer.style.transform="translateY(0)";
+    },50);
+}
+
+function showPhotoBtn(){
+    const photo = document.getElementById("photo");
+    photo.style.display = "block";
+    photo.style.opacity = 1;
+    photo.classList.add("pulse");
+}
+
+function acceptedSecret(){
+    alert("يسعدلي اياها ياسمينتي مرتي حبيبتي 💖💍");
+}
+
+function moveButtonSecret(){
+    const btn=document.getElementById("noSecret");
+    btn.style.position="absolute";
+    btn.style.top=Math.random()*70+10+"%";
+    btn.style.left=Math.random()*70+10+"%";
+}
+</script>
+
+</body>
+</html>
